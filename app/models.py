@@ -8,6 +8,7 @@ from datetime import datetime
 import hashlib
 from markdown import markdown
 import bleach
+from app.exceptions import ValidationError
 
 class Permission:
 	FOLLOW = 1
