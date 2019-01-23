@@ -40,3 +40,6 @@ nosetests.xml
 
 # Virtual environment
 venv
+
+# Vim Temp Files
+*.swp
