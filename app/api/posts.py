@@ -11,7 +11,7 @@ def get_posts():
 		next = url_for('api.get_posts', page=page+1)
 	return jsonify({'posts': [post.to_json() for post in posts], 'prev_url': prev, 'next_url': next, 'count': pagination.total})
 	posts = Post.query.all()
-	return jsonify({'posts': [post.to_json() for post in posts]}
+	return jsonify({'posts': [post.to_json() for post in posts]})
 
 @api.route('/posts/<int:id>')
 def get_post():

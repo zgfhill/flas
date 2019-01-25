@@ -3,6 +3,7 @@ import click
 from flask_migrate import Migrate, upgrade
 from app import create_app, db
 from app.models import User, Role, Post, Follow
+from flask_migrate import upgrade
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 migrate = Migrate(app, db)
@@ -26,3 +27,11 @@ def profile(length, profile_dir):
 	from werkzeug.contrib.profiler import ProfilerMiddleware
 	app.wsgi_app = ProfileMiddleware(app.wsgi_app, restrictions=[length], profile_dir=profile_dir)
 	app.run(debug=False)
+
+@app.cli.command()
+def deploy():
+	'''Run deplyment tasks.'''
+	upgrade()
+	Role.insert_roles()
+	User.add_self_follows()
+
